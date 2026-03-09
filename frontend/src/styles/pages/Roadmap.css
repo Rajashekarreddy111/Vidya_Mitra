@@ -1,0 +1,122 @@
+.roadmap-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.roadmap-header-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.progress-bar-container {
+    width: 100%;
+    height: 8px;
+    background-color: var(--border-color);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background-color: var(--success-color);
+    transition: width 0.3s ease;
+}
+
+.section-card {
+    margin-bottom: 1rem;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    padding: 0.5rem 0;
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.section-progress {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.topic-table {
+    margin-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.topic-row-header {
+    display: grid;
+    grid-template-columns: 40px 1fr 100px 100px;
+    padding: 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--secondary-color);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.topic-row {
+    display: grid;
+    grid-template-columns: 40px 1fr 100px 100px;
+    padding: 1rem;
+    align-items: center;
+    border-bottom: 1px solid #f1f5f9;
+    transition: background-color 0.2s;
+}
+
+.topic-row:last-child {
+    border-bottom: none;
+}
+
+.topic-row.completed {
+    background-color: #f0fdf4;
+}
+
+.topic-name {
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.topic-row.completed .topic-name {
+    color: var(--secondary-color);
+    text-decoration: line-through;
+}
+
+.difficulty-badge {
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    text-align: center;
+}
+
+.badge-easy {
+    background-color: #dcfce7;
+    color: #166534;
+}
+
+.badge-medium {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
+.badge-hard {
+    background-color: #fee2e2;
+    color: #991b1b;
+}
+
+.youtube-link {
+    color: #ef4444;
+    display: flex;
+    justify-content: center;
+}

@@ -1,0 +1,128 @@
+:root {
+  --primary-color: #4f46e5;
+  --primary-hover: #4338ca;
+  --secondary-color: #64748b;
+  --bg-color: #f8fafc;
+  --text-color: #1e293b;
+  --border-color: #e2e8f0;
+  --card-bg: #ffffff;
+  --error-color: #ef4444;
+  --success-color: #10b981;
+  --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --border-radius: 8px;
+  --spacing: 1rem;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.5;
+}
+
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: var(--border-radius);
+  transition: all 0.2s;
+}
+
+input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  margin-top: 0.5rem;
+  outline: none;
+}
+
+input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.1);
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 var(--spacing);
+}
+
+.card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border-color);
+}
+
+.card-constrained {
+  max-width: 650px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* refined Toast Styles */
+[data-sonner-toast] {
+  font-size: 0.95rem !important;
+  font-weight: 500 !important;
+  padding: 1rem !important;
+  border-radius: 10px !important;
+  width: 350px !important;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1) !important;
+}
+
+[data-sonner-toast] [data-icon] {
+  transform: scale(1.2);
+  margin-right: 0.75rem;
+}
+
+[data-sonner-toast] [data-close-button] {
+  background: #f1f5f9 !important;
+  border: 1px solid var(--border-color) !important;
+  color: #1e293b !important;
+  width: 20px !important;
+  height: 20px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 1.1rem !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+  border-radius: 50% !important;
+  position: absolute !important;
+  left: auto !important;
+  right: 12px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+[data-sonner-toast] [data-close-button]::after {
+  content: "X" !important;
+}
+
+[data-sonner-toast] [data-close-button] svg {
+  display: none !important;
+  /* Hide original X icon */
+}
+
+[data-sonner-toast] [data-icon] {
+  transform: scale(1.5);
+  margin-right: 1rem;
+}
+
+[data-sonner-toast] [data-title] {
+  margin-bottom: 4px;
+}
