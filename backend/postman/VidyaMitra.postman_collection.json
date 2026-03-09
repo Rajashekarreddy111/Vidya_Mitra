@@ -1,0 +1,675 @@
+{
+  "info": {
+    "name": "VidyaMitra Backend APIs",
+    "_postman_id": "a6b7f7a4-7e25-4b1d-8d4a-3c1f9179d9aa",
+    "description": "Postman collection to test all VidyaMitra backend APIs.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"{{userName}}\",\n  \"email\": \"{{userEmail}}\",\n  \"password\": \"{{userPassword}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/register",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "register"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Verify OTP",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{userEmail}}\",\n  \"otp\": \"{{signupOtp}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/verify-otp",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "verify-otp"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "  const json = pm.response.json();",
+                  "  if (json.token) {",
+                  "    pm.environment.set('token', json.token);",
+                  "  }",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{userEmail}}\",\n  \"password\": \"{{userPassword}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Me",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auth/me",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "me"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Forgot Password",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{userEmail}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/forgot-password",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "forgot-password"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Reset Password",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{userEmail}}\",\n  \"otp\": \"{{resetOtp}}\",\n  \"newPassword\": \"{{newPassword}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/reset-password",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "reset-password"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Resume",
+      "item": [
+        {
+          "name": "Upload Resume",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "resume",
+                  "type": "file",
+                  "src": ""
+                },
+                {
+                  "key": "resumeText",
+                  "value": "I am a backend developer with Node.js, Express, and SQL knowledge. I built APIs and authentication modules.",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/resume/upload",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "resume",
+                "upload"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get My Resumes",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/resume/me",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "resume",
+                "me"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Roadmap",
+      "item": [
+        {
+          "name": "Generate Roadmap",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "  const json = pm.response.json();",
+                  "  if (json.roadmapId) {",
+                  "    pm.environment.set('roadmapId', json.roadmapId);",
+                  "  }",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jobRole\": \"{{jobRole}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/roadmap/generate",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "roadmap",
+                "generate"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get My Roadmaps",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/roadmap/me",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "roadmap",
+                "me"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Topic Completion",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"isCompleted\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/roadmap/topic/{{topicId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "roadmap",
+                "topic",
+                "{{topicId}}"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Quiz",
+      "item": [
+        {
+          "name": "Generate Quiz",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "  const json = pm.response.json();",
+                  "  if (json.quizId) {",
+                  "    pm.environment.set('quizId', json.quizId);",
+                  "  }",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"topic\": \"JavaScript Basics\",\n  \"numQuestions\": 5\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/quiz/generate",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "quiz",
+                "generate"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Evaluate Quiz",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"quizId\": \"{{quizId}}\",\n  \"answers\": [\"A\", \"B\", \"C\", \"D\", \"A\"]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/quiz/evaluate",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "quiz",
+                "evaluate"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Quiz History",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/quiz/history",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "quiz",
+                "history"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Interview",
+      "item": [
+        {
+          "name": "Generate Interview Questions",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "  const json = pm.response.json();",
+                  "  if (json.interviewId) {",
+                  "    pm.environment.set('interviewId', json.interviewId);",
+                  "  }",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jobRole\": \"{{jobRole}}\",\n  \"type\": \"technical\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/interview/generate",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "interview",
+                "generate"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Evaluate Interview Answers",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"interviewId\": \"{{interviewId}}\",\n  \"answers\": [\n    { \"questionIndex\": 0, \"answer\": \"I use React hooks like useState and useEffect to manage component state and side effects.\" },\n    { \"questionIndex\": 1, \"answer\": \"I improve performance using memoization, lazy loading and API response caching.\" }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/interview/evaluate",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "interview",
+                "evaluate"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Interview History",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/interview/history",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "interview",
+                "history"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Progress",
+      "item": [
+        {
+          "name": "Get Dashboard Analytics",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/progress/dashboard",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "progress",
+                "dashboard"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "YouTube",
+      "item": [
+        {
+          "name": "Search Learning Videos",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/youtube/search?topic={{youtubeTopic}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "youtube",
+                "search"
+              ],
+              "query": [
+                {
+                  "key": "topic",
+                  "value": "{{youtubeTopic}}"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5000/api"
+    },
+    {
+      "key": "token",
+      "value": ""
+    },
+    {
+      "key": "userName",
+      "value": "Rajas Kumar"
+    },
+    {
+      "key": "userEmail",
+      "value": "rajas.test@example.com"
+    },
+    {
+      "key": "userPassword",
+      "value": "Test@1234"
+    },
+    {
+      "key": "newPassword",
+      "value": "NewTest@1234"
+    },
+    {
+      "key": "signupOtp",
+      "value": ""
+    },
+    {
+      "key": "resetOtp",
+      "value": ""
+    },
+    {
+      "key": "jobRole",
+      "value": "Backend Developer"
+    },
+    {
+      "key": "topicId",
+      "value": ""
+    },
+    {
+      "key": "roadmapId",
+      "value": ""
+    },
+    {
+      "key": "quizId",
+      "value": ""
+    },
+    {
+      "key": "interviewId",
+      "value": ""
+    },
+    {
+      "key": "youtubeTopic",
+      "value": "Node.js authentication"
+    }
+  ]
+}
