@@ -18,7 +18,7 @@ const companyPreparationRoutes = require("./routes/companyPreparation.routes");
 const { notFound, errorHandler } = require("./middleware/error.middleware");
 
 const app = express();
-const defaultCorsOrigins = ["http://localhost:5173", "http://localhost:8080"];
+const defaultCorsOrigins = ["http://localhost:5173", "http://localhost:8080", "https://vidya-mitra-knd6.onrender.com"];
 const envCorsOrigins = (process.env.CORS_ORIGIN || "")
   .split(",")
   .map((origin) => origin.trim())
